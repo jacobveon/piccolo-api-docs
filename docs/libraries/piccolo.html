@@ -69,6 +69,10 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
+	<td class="name" nowrap><a href="#configureaspirate">configureaspirate (volume)</a></td>
+	<td class="summary">Triggers a configure aspirate command for the given volume.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#dispensenoncontactmultistage">dispensenoncontactmultistage (volume)</a></td>
 	<td class="summary">Dispense a specified volume.</td>
 	</tr>
@@ -80,6 +84,34 @@
 	<td class="name" nowrap><a href="#dispensenoncontact">dispensenoncontact ()</a></td>
 	<td class="summary">Dispense all liquid.</td>
 	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getpressure">getpressure ()</a></td>
+	<td class="summary">Returns the current combined pressure value.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sendcommand">sendcommand (messageId, data, dlc)</a></td>
+	<td class="summary">Sends a raw CAN command to the piccolo.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#starttransportliquid">starttransportliquid ()</a></td>
+	<td class="summary">Triggers a start transport liquid command.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setlldmode">setlldmode (mode)</a></td>
+	<td class="summary">Sets the LLD mode on the piccolo.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setlldtimeout">setlldtimeout (timeout)</a></td>
+	<td class="summary">Sets the LLD timeout on the piccolo.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#stoptransportliquid">stoptransportliquid ()</a></td>
+	<td class="summary">Triggers a stop transport liquid command.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#pressuredetect">pressuredetect (zone, position, maxDistance)</a></td>
+	<td class="summary">Moves the Z axis until either the pressure threshold is exceeded or the max distance is reached.</td>
+	</tr>
 </table>
 
 <br/>
@@ -89,6 +121,31 @@
     <h2 class="section-header "><a name="Functions"></a>Functions</h2>
 
     <dl class="function">
+    <dt>
+    <a name = "configureaspirate"></a>
+    <strong>configureaspirate (volume)</strong>
+    </dt>
+    <dd>
+    Triggers a configure aspirate command for the given volume.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">volume</span>
+            <span class="types"><span class="type">number</span></span>
+         Volume to aspirate
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">piccolo.configureaspirate(<span class="number">20.0</span>)</pre>
+    </ul>
+
+</dd>
     <dt>
     <a name = "dispensenoncontactmultistage"></a>
     <strong>dispensenoncontactmultistage (volume)</strong>
@@ -112,7 +169,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">veon.dispensenoncontactmultistage(<span class="number">20.0</span>)</pre>
+        <pre class="example">piccolo.dispensenoncontactmultistage(<span class="number">20.0</span>)</pre>
     </ul>
 
 </dd>
@@ -132,7 +189,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">veon.dispensewet()</pre>
+        <pre class="example">piccolo.dispensewet()</pre>
     </ul>
 
 </dd>
@@ -152,7 +209,185 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">veon.dispensenoncontact()</pre>
+        <pre class="example">piccolo.dispensenoncontact()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getpressure"></a>
+    <strong>getpressure ()</strong>
+    </dt>
+    <dd>
+    Returns the current combined pressure value.
+
+
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">piccolo.getpressure()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "sendcommand"></a>
+    <strong>sendcommand (messageId, data, dlc)</strong>
+    </dt>
+    <dd>
+    Sends a raw CAN command to the piccolo.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">messageId</span>
+
+
+
+        </li>
+        <li><span class="parameter">data</span>
+
+
+
+        </li>
+        <li><span class="parameter">dlc</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">piccolo.sendcommand(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "starttransportliquid"></a>
+    <strong>starttransportliquid ()</strong>
+    </dt>
+    <dd>
+    Triggers a start transport liquid command.
+
+
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">piccolo.starttransportliquid()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setlldmode"></a>
+    <strong>setlldmode (mode)</strong>
+    </dt>
+    <dd>
+    Sets the LLD mode on the piccolo.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">mode</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">piccolo.setlldmode(<span class="number">1</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setlldtimeout"></a>
+    <strong>setlldtimeout (timeout)</strong>
+    </dt>
+    <dd>
+    Sets the LLD timeout on the piccolo.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">timeout</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">piccolo.setlldtimeout(<span class="number">30000</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "stoptransportliquid"></a>
+    <strong>stoptransportliquid ()</strong>
+    </dt>
+    <dd>
+    Triggers a stop transport liquid command.
+
+
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">piccolo.stoptransportliquid()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "pressuredetect"></a>
+    <strong>pressuredetect (zone, position, maxDistance)</strong>
+    </dt>
+    <dd>
+    Moves the Z axis until either the pressure threshold is exceeded or the max distance is reached.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zone</span>
+
+
+
+        </li>
+        <li><span class="parameter">position</span>
+
+
+
+        </li>
+        <li><span class="parameter">maxDistance</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">piccolo.pressuredetect(<span class="string">"Zone2"</span>, <span class="string">"A1"</span>, <span class="number">20</span>)</pre>
     </ul>
 
 </dd>
@@ -163,7 +398,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2024-08-29 10:54:07 </i>
+<i style="float:right;">Last updated 2024-08-29 11:02:57 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
