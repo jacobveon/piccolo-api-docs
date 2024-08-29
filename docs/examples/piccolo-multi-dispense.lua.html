@@ -37,9 +37,9 @@
 <ul class="nowrap">
   <li><a href="../examples/movement.lua.html">movement.lua</a></li>
   <li><a href="../examples/piccolo-mix.lua.html">piccolo-mix.lua</a></li>
-  <li><a href="../examples/piccolo-multi-dispense.lua.html">piccolo-multi-dispense.lua</a></li>
+  <li><strong>piccolo-multi-dispense.lua</strong></li>
   <li><a href="../examples/piccolo-pressure-detect.lua.html">piccolo-pressure-detect.lua</a></li>
-  <li><strong>piccolo-simple-transfer.lua</strong></li>
+  <li><a href="../examples/piccolo-simple-transfer.lua.html">piccolo-simple-transfer.lua</a></li>
 </ul>
 <h2>Libraries</h2>
 <ul class="nowrap">
@@ -57,12 +57,13 @@
 
 <div id="content">
 
-    <h2>piccolo-simple-transfer.lua</h2>
+    <h2>piccolo-multi-dispense.lua</h2>
 <pre>
 <span class="comment">--[[
-Performs a single transfer
+Performs a multi-dispense transfer.
 ]]</span>
-<span class="keyword">local</span> volume = <span class="number">5</span>
+<span class="keyword">local</span> volume = <span class="number">30</span>
+<span class="keyword">local</span> dispenseVolume = <span class="number">10</span>
 <span class="keyword">local</span> aspirateInsertionDepth = <span class="number">10</span>
 
 <span class="keyword">local</span> tipZone = <span class="string">"Zone1"</span>
@@ -73,9 +74,19 @@ Performs a single transfer
     insertionDepth = <span class="number">20</span>
 }
 
-<span class="keyword">local</span> destination = {
-    zone = <span class="string">"Zone3"</span>,
-    position = <span class="string">"A1"</span>
+<span class="keyword">local</span> destinations = {
+    {
+        zone = <span class="string">"Zone3"</span>,
+        position = <span class="string">"A1"</span>
+    },
+    {
+        zone = <span class="string">"Zone3"</span>,
+        position = <span class="string">"A2"</span>
+    },
+    {
+        zone = <span class="string">"Zone3"</span>,
+        position = <span class="string">"A3"</span>
+    }
 }
 
 flow.initialise()
@@ -98,15 +109,17 @@ veon.getvol(volume, <span class="number">0</span>, <span class="keyword">false</
 <span class="comment">-- reverse back out of the liquid
 </span>veon.gorel(<span class="number">0</span>, <span class="number">0</span>, (source.insertionDepth*-<span class="number">1</span>))
 
-piccolo.starttransportliquid()
+<span class="keyword">for</span> i, destination <span class="keyword">in</span> <span class="global">ipairs</span>(destinations) <span class="keyword">do</span>
+    piccolo.starttransportliquid()
 
-flow.go(destination.zone, destination.position)
+    flow.go(destination.zone, destination.position)
 
-piccolo.stoptransportliquid()
+    piccolo.stoptransportliquid()
 
-flow.log(<span class="number">0</span>, <span class="string">"Dispensing "</span> .. volume .. <span class="string">"uL in "</span> .. destination.zone .. <span class="string">":"</span> .. destination.position)
+    flow.log(<span class="number">0</span>, <span class="string">"Dispensing "</span> .. dispenseVolume .. <span class="string">"uL in "</span> .. destination.zone .. <span class="string">":"</span> .. destination.position)
 
-piccolo.dispensenoncontact()
+    piccolo.dispensenoncontactmultistage(dispenseVolume)
+<span class="keyword">end</span>
 
 flow.log(<span class="number">0</span>, <span class="string">"Ejecting tip"</span>)
 

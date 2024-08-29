@@ -36,10 +36,10 @@
 <h2>Examples</h2>
 <ul class="nowrap">
   <li><a href="../examples/movement.lua.html">movement.lua</a></li>
-  <li><a href="../examples/piccolo-mix.lua.html">piccolo-mix.lua</a></li>
+  <li><strong>piccolo-mix.lua</strong></li>
   <li><a href="../examples/piccolo-multi-dispense.lua.html">piccolo-multi-dispense.lua</a></li>
   <li><a href="../examples/piccolo-pressure-detect.lua.html">piccolo-pressure-detect.lua</a></li>
-  <li><strong>piccolo-simple-transfer.lua</strong></li>
+  <li><a href="../examples/piccolo-simple-transfer.lua.html">piccolo-simple-transfer.lua</a></li>
 </ul>
 <h2>Libraries</h2>
 <ul class="nowrap">
@@ -57,11 +57,25 @@
 
 <div id="content">
 
-    <h2>piccolo-simple-transfer.lua</h2>
+    <h2>piccolo-mix.lua</h2>
 <pre>
 <span class="comment">--[[
-Performs a single transfer
+How to perform a mix using the piccolo module.
+
+The flow module offers a helper (@see flow.mix) function to perform mixing.
 ]]</span>
+
+<span class="keyword">function</span> mix(volume, cycles, mixTipDepth, flowRate, tracked)
+    veon.sendrawpiccolocommand(<span class="number">7001</span>, volume*<span class="number">1000</span>, <span class="number">4</span>)
+    veon.sendrawpiccolocommand(<span class="number">7003</span>, flowRate*<span class="number">1000</span>, <span class="number">4</span>)
+    veon.sendrawpiccolocommand(<span class="number">7007</span>, flowRate*<span class="number">1000</span>, <span class="number">4</span>)
+
+    <span class="keyword">for</span> i = <span class="number">1</span>, cycles <span class="keyword">do</span>
+        veon.sendrawpiccolocommand(<span class="number">10</span>)
+        veon.sendrawpiccolocommand(<span class="number">11</span>)
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
 <span class="keyword">local</span> volume = <span class="number">5</span>
 <span class="keyword">local</span> aspirateInsertionDepth = <span class="number">10</span>
 
@@ -107,6 +121,12 @@ piccolo.stoptransportliquid()
 flow.log(<span class="number">0</span>, <span class="string">"Dispensing "</span> .. volume .. <span class="string">"uL in "</span> .. destination.zone .. <span class="string">":"</span> .. destination.position)
 
 piccolo.dispensenoncontact()
+
+veon.gorel(<span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>)
+
+mix(<span class="number">50</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">0</span>)
+
+veon.gorel(<span class="number">0</span>, <span class="number">0</span>, -<span class="number">8</span>)
 
 flow.log(<span class="number">0</span>, <span class="string">"Ejecting tip"</span>)
 
