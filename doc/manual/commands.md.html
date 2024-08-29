@@ -1,0 +1,513 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>i.prep x piccolo api beta</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>i.prep x piccolo api <h6 class=version>beta</h6></h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Command_Wrapper">Command Wrapper </a></li>
+<li><a href="#Assign_Object_to_Zone">Assign Object to Zone </a></li>
+<li><a href="#Get_System_Status">Get System Status </a></li>
+<li><a href="#Go_to_Coordinate">Go to Coordinate </a></li>
+<li><a href="#Go_Relative">Go Relative </a></li>
+<li><a href="#Go_Absolute">Go Absolute </a></li>
+<li><a href="#Home">Home </a></li>
+<li><a href="#Pause_Script">Pause Script </a></li>
+<li><a href="#Reset_Motors">Reset Motors </a></li>
+<li><a href="#Run_Script">Run Script </a></li>
+<li><a href="#Remove_Zone_Object">Remove Zone Object </a></li>
+<li><a href="#Resume_Script">Resume Script </a></li>
+<li><a href="#Set_Axes_Power">Set Axes Power </a></li>
+<li><a href="#Stop_Script">Stop Script </a></li>
+<li><a href="#Validate_Script">Validate Script </a></li>
+</ul>
+
+
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><strong>commands</strong></li>
+  <li><a href="../manual/labware.md.html">labware</a></li>
+  <li><a href="../manual/piccolo.md.html">piccolo</a></li>
+  <li><a href="../manual/pylabrobot.md.html">pylabrobot</a></li>
+  <li><a href="../manual/python-example.md.html">python-example</a></li>
+</ul>
+<h2>Libraries</h2>
+<ul class="nowrap">
+  <li><a href="../libraries/veon.html">veon</a></li>
+  <li><a href="../libraries/flow.html">flow</a></li>
+  <li><a href="../libraries/piccolo.html">piccolo</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/movement.lua.html">movement.lua</a></li>
+  <li><a href="../examples/piccolo-pressure-detect.lua.html">piccolo-pressure-detect.lua</a></li>
+  <li><a href="../examples/piccolo-simple-transfer.lua.html">piccolo-simple-transfer.lua</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+
+<h1>JSON API</h1>
+<p><a name="Command_Wrapper"></a></p>
+<h2>Command Wrapper</h2>
+
+
+<ul>
+    <li><code>api_version</code> - Use the latest api version available, e.g. <code>2.0.0</code>.</li>
+    <li><code>ref_id</code> - Custom string field that is echoed back in the response.</li>
+    <li><code>command</code> - Command to execute.</li>
+    <li><code>payload</code> - Payload json for the command.</li>
+</ul>
+
+
+<h3>Example Request</h3>
+
+
+<pre>
+{
+    <span class="string">"api_version"</span>: <span class="string">"2.0.0"</span>,
+    <span class="string">"ref_id"</span>: <span class="string">"1"</span>,
+    <span class="string">"command"</span>: <span class="string">"go"</span>,
+    <span class="string">"payload"</span>: {
+        <span class="string">"zone"</span>: <span class="string">"Zone1"</span>,
+        <span class="string">"coord"</span>: <span class="string">"A1"</span>
+    }
+}
+</pre>
+
+
+<h3>Example Response</h3>
+
+
+<pre>
+{
+    <span class="string">"api_version"</span>: <span class="string">"2.0.0"</span>,
+    <span class="string">"ref_id"</span>: <span class="string">"1"</span>,
+    <span class="string">"success"</span>: <span class="keyword">true</span>
+}
+</pre>
+
+
+<hr/>
+
+<h1>Commands</h1>
+<p><a name="Assign_Object_to_Zone"></a></p>
+<h2>Assign Object to Zone</h2>
+
+<p><strong>Command:</strong> <code>assign_zone</code></p>
+
+<p>Sets the object data for the given zone.</p>
+
+<p>The i.prep object generator can generate uniform objects. </p>
+
+<p>Lua equivalent: N/A</p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+
+<pre>
+{
+    <span class="string">"zone"</span>: <span class="string">"Zone1"</span>,
+    <span class="string">"object_data"</span>: {
+        <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,
+        <span class="string">"uuid"</span>: <span class="string">"ef1a8da1-291b-4993-b0cb-d133dcbb244b"</span>,
+        <span class="string">"plateData"</span>: {
+            <span class="string">"uuid"</span>: <span class="string">"a87db0fa-e37a-4fb1-be7c-7aaac36952f6"</span>,
+            <span class="string">"displayName"</span>: <span class="string">"Empty Example Plate"</span>,
+            <span class="string">"dimensions"</span>: {
+                <span class="string">"x"</span>: <span class="number">127.76</span>,
+                <span class="string">"y"</span>: <span class="number">85.48</span>,
+                <span class="string">"z"</span>: <span class="number">15</span>
+            },
+            <span class="string">"locations"</span>: [{
+                <span class="string">"uuid"</span>: <span class="string">"8b84e4bb-001a-40b0-8489-4290edf03530"</span>,
+                <span class="string">"x"</span>: <span class="number">8</span>,
+                <span class="string">"y"</span>: <span class="number">73.48</span>,
+                <span class="string">"coord"</span>: <span class="string">"L8"</span>,
+                <span class="string">"radius"</span>: <span class="number">0</span>
+            }]
+        },
+        <span class="string">"items"</span>: [{
+            <span class="string">"uuid"</span>: <span class="string">"dc7a5f01-013e-4033-a62f-b8a7250624fc"</span>,
+            <span class="string">"locationId"</span>: <span class="string">"8b84e4bb-001a-40b0-8489-4290edf03530"</span>,
+            <span class="string">"item"</span>: {
+                <span class="string">"uuid"</span>: <span class="string">"8e4161ae-4ac8-482d-a3a8-c387f331babd"</span>,
+                <span class="string">"type"</span>: <span class="string">"well"</span>,
+                <span class="string">"physicalProperties"</span>: {
+                    <span class="string">"radius"</span>: <span class="number">0</span>,
+                    <span class="string">"depth"</span>: <span class="number">0</span>,
+                    <span class="string">"capacity"</span>: <span class="number">0</span>,
+                    <span class="string">"consumable_clearance"</span>: <span class="number">0</span>,
+                    <span class="string">"travel_clearance"</span>: <span class="number">0</span>,
+                    <span class="string">"length"</span>: <span class="number">0</span>
+                },
+                <span class="string">"runtimeData"</span>: {
+                    <span class="string">"Volume"</span>: <span class="number">0</span>,
+                    <span class="string">"Consumed"</span>: <span class="keyword">false</span>
+                }
+            }
+        }]
+    }
+}
+</pre>
+
+
+<hr/>
+
+<p><a name="Get_System_Status"></a></p>
+<h2>Get System Status</h2>
+
+<p><strong>Command:</strong> <code>status</code></p>
+
+<p>Gets the current system status.</p>
+
+<p>Lua equivalent: N/A</p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+<p>N/A</p>
+
+<p><strong>Response</strong></p>
+
+
+<pre>
+{
+    <span class="string">"ref_id"</span>: <span class="string">"1"</span>,
+    <span class="string">"success"</span>: <span class="keyword">true</span>,
+    <span class="string">"payload"</span>: {
+        <span class="string">"metadata"</span>: {
+            <span class="string">"api_version"</span>: <span class="string">"2.0.0"</span>,
+            <span class="string">"backend_version"</span>: <span class="string">"2.0.0"</span>,
+            <span class="string">"serial"</span>: <span class="string">"VS-0524-00000"</span>,
+        },
+        <span class="string">"motor"</span>: {
+            <span class="string">"x"</span>: <span class="number">0</span>,
+            <span class="string">"y"</span>: <span class="number">20</span>,
+            <span class="string">"z"</span>: <span class="number">0</span>
+        },
+        <span class="string">"pipette"</span>: {
+            <span class="string">"serial"</span>: <span class="string">"82555645"</span>
+        },
+        <span class="string">"door"</span>: {
+            <span class="string">"state"</span>: <span class="number">1</span>
+        },
+        <span class="string">"waste"</span>: {
+            <span class="string">"left"</span>: {
+                <span class="string">"state"</span>: <span class="number">1</span>
+            },
+            <span class="string">"right"</span>: {
+                <span class="string">"state"</span>: <span class="number">1</span>
+            }
+        },
+        <span class="string">"light"</span>: {
+            <span class="string">"internal"</span>: {
+                <span class="string">"state"</span>: <span class="number">1</span>
+            },
+            <span class="string">"uv"</span>: {
+                <span class="string">"state"</span>: <span class="number">0</span>
+            }
+        }
+    }
+}
+</pre>
+
+
+<hr/>
+
+<p><a name="Go_to_Coordinate"></a></p>
+<h2>Go to Coordinate</h2>
+
+<p><strong>Command:</strong> <code>go</code></p>
+
+<p>Moves the pipette/tip to the given zone coordinate.</p>
+
+<p>Lua equivalent: <a href="../libraries/veon.html#gozone">veon.gozone</a></p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+
+<pre>
+{
+    <span class="string">"zone"</span>: <span class="string">"Zone1"</span>,
+    <span class="string">"coord"</span>: <span class="string">"A1"</span>
+}
+</pre>
+
+
+<hr/>
+
+<p><a name="Go_Relative"></a></p>
+<h2>Go Relative</h2>
+
+<p><strong>Command:</strong> <code>go_rel</code></p>
+
+<p>Moves the pipette/tip relatively.</p>
+
+<p>Lua equivalent: <a href="../libraries/veon.html#gorel">veon.gorel</a></p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+
+<pre>
+{
+    <span class="string">"x"</span>: <span class="number">0.0</span>,
+    <span class="string">"y"</span>: <span class="number">0.0</span>,
+    <span class="string">"z"</span>: <span class="number">7.4</span>
+}
+</pre>
+
+
+<hr/>
+
+<p><a name="Go_Absolute"></a></p>
+<h2>Go Absolute</h2>
+
+<p><strong>Command:</strong> <code>go_abs</code></p>
+
+<p>Moves the pipette/tip to the absolute position.</p>
+
+<p>Lua equivalent: <a href="../libraries/veon.html#goabs">veon.goabs</a></p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+
+<pre>
+{
+    <span class="string">"x"</span>: <span class="number">50.0</span>,
+    <span class="string">"y"</span>: <span class="number">75.0</span>,
+    <span class="string">"z"</span>: <span class="number">20.0</span>
+}
+</pre>
+
+
+<hr/>
+
+<p><a name="Home"></a></p>
+<h2>Home</h2>
+
+<p><strong>Command:</strong> <code>home</code></p>
+
+<p>Moves the system to the home position.</p>
+
+<p>Lua equivalent: <a href="../libraries/veon.html#home">veon.home</a></p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+<p>N/A</p>
+
+<hr/>
+
+<p><a name="Pause_Script"></a></p>
+<h2>Pause Script</h2>
+
+<p><strong>Command:</strong> <code>pause</code></p>
+
+<p>Pauses the script that is currently running when the script command being executed completes.</p>
+
+<p>Lua equivalent: <a href="../libraries/veon.html#pause">veon.pause</a></p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+<p>N/A</p>
+
+<hr/>
+
+<p><a name="Reset_Motors"></a></p>
+<h2>Reset Motors</h2>
+
+<p><strong>Command:</strong> <code>reset_motors</code></p>
+
+<p>Resets the motors after either they have been powered off or a stall has occurred.</p>
+
+<p>Lua equivalent: N/A</p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+<p>N/A</p>
+
+<hr/>
+
+<p><a name="Run_Script"></a></p>
+<h2>Run Script</h2>
+
+<p><strong>Command:</strong> <code>run</code></p>
+
+<p>Run the given script.</p>
+
+<p>Lua equivalent: N/A</p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+
+<pre>
+{
+    <span class="string">"script_id"</span>: <span class="string">"demoscript"</span>,
+    <span class="string">"script"</span>: <span class="string">"veon.acquiretip('Zone1', 'A1')\nveon.aspirate('Zone2', 'A1', 12.0, 200.0, false)\nveon.dispense('Zone3', 'A1', 12.0, 200.0, false)\nveon.eject(2)"</span>
+}
+</pre>
+
+
+<hr/>
+
+<p><a name="Remove_Zone_Object"></a></p>
+<h2>Remove Zone Object</h2>
+
+<p><strong>Command:</strong> <code>remove_zone</code></p>
+
+<p>Removes the object in the given zone so that it can be assigned a new object.</p>
+
+<p>Lua equivalent: N/A</p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+
+<pre>
+{
+    <span class="string">"zone_name"</span>: <span class="string">"Zone2"</span>
+}
+</pre>
+
+
+<hr/>
+
+<p><a name="Resume_Script"></a></p>
+<h2>Resume Script</h2>
+
+<p><strong>Command:</strong> <code>resume</code></p>
+
+<p>Resumes the currently paused script.</p>
+
+<p>Lua equivalent: N/A</p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+<p>N/A</p>
+
+<hr/>
+
+<p><a name="Set_Axes_Power"></a></p>
+<h2>Set Axes Power</h2>
+
+<p><strong>Command:</strong> <code>set_axes_power</code></p>
+
+<p>Turns the power to the motors on or off depending on the <code>state</code> parameter.</p>
+
+<p>The system must be <a href="#Home">homed</a> after being powered off and on.</p>
+
+<p>Lua equivalent: N/A</p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+
+<pre>
+{
+    <span class="string">"state"</span>: <span class="keyword">false</span>
+}
+</pre>
+
+
+<hr/>
+
+<p><a name="Stop_Script"></a></p>
+<h2>Stop Script</h2>
+
+<p><strong>Command:</strong> <code>stop</code></p>
+
+<p>Stops the script that is currently running when it reaches the end of the currently executing command.</p>
+
+<p>Lua equivalent: N/A</p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+<p>N/A</p>
+
+<hr/>
+
+<p><a name="Validate_Script"></a></p>
+<h2>Validate Script</h2>
+
+<p><strong>Command:</strong> <code>validate</code></p>
+
+<p>Dry run the given script to validate it.</p>
+
+<p>Lua equivalent: N/A</p>
+
+<h3>Example</h3>
+
+<p><strong>Payload</strong></p>
+
+
+<pre>
+{
+    <span class="string">"script_id"</span>: <span class="string">"demoscript"</span>,
+    <span class="string">"script"</span>: <span class="string">"veon.acquiretip('Zone1', 'A1')\nveon.aspirate('Zone2', 'A1', 12.0, 200.0, false)\nveon.dispense('Zone3', 'A1', 12.0, 200.0, false)\nveon.eject(2)"</span>
+}
+</pre>
+
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2024-08-28 16:32:36 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

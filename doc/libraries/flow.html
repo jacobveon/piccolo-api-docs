@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>i.prep x piccolo api beta</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>i.prep x piccolo api <h6 class=version>beta</h6></h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Libraries</h2>
+<ul class="nowrap">
+  <li><a href="../libraries/veon.html">veon</a></li>
+  <li><strong>flow</strong></li>
+  <li><a href="../libraries/piccolo.html">piccolo</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/labware.md.html">labware</a></li>
+  <li><a href="../manual/piccolo.md.html">piccolo</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/movement.lua.html">movement.lua</a></li>
+  <li><a href="../examples/piccolo-pressure-detect.lua.html">piccolo-pressure-detect.lua</a></li>
+  <li><a href="../examples/piccolo-simple-transfer.lua.html">piccolo-simple-transfer.lua</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>flow</code></h1>
+<p>Extended lua library available when using &lt;flow&gt; to run scripts.</p>
+<p> When writing scripts in <flow> you have access to the following lua scripting extended api.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#ejectLeft">ejectLeft ()</a></td>
+	<td class="summary">Ejects the tip into the left eject station.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ejectRight">ejectRight ()</a></td>
+	<td class="summary">Ejects the tip into the right eject station.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ejectWasteVolume">ejectWasteVolume (tipWastePosition)</a></td>
+	<td class="summary">Clears the tip contents into the waste container without ejecting the tip.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#go">go (zone, position)</a></td>
+	<td class="summary">Wrapper around veon.gozone that removes the need to resolve the coordinate.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#resolveAddress">resolveAddress (zone, coord)</a></td>
+	<td class="summary">When using the raw i.prep lua scripting api the coordinates for each
+zone need to be resolved by <flow> to their unique identifier.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "ejectLeft"></a>
+    <strong>ejectLeft ()</strong>
+    </dt>
+    <dd>
+    Ejects the tip into the left eject station.
+
+
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">flow.ejectLeft()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "ejectRight"></a>
+    <strong>ejectRight ()</strong>
+    </dt>
+    <dd>
+    Ejects the tip into the right eject station.
+
+
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">flow.ejectRight()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "ejectWasteVolume"></a>
+    <strong>ejectWasteVolume (tipWastePosition)</strong>
+    </dt>
+    <dd>
+    Clears the tip contents into the waste container without ejecting the tip.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tipWastePosition</span>
+            <span class="types"><span class="type">number</span></span>
+         ID of the tip waste to use
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">flow.ejectWasteVolume(tipWastePosition)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "go"></a>
+    <strong>go (zone, position)</strong>
+    </dt>
+    <dd>
+    Wrapper around veon.gozone that removes the need to resolve the coordinate.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zone</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         Zone of the position
+        </li>
+        <li><span class="parameter">position</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         Position to go to in the zone
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/veon.html#gozone">veon.gozone</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">flow.go(<span class="string">'Zone2'</span>, <span class="string">'A1'</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "resolveAddress"></a>
+    <strong>resolveAddress (zone, coord)</strong>
+    </dt>
+    <dd>
+    When using the raw i.prep lua scripting api the coordinates for each
+zone need to be resolved by <flow> to their unique identifier. </p>
+
+<p>This function provides a simple means of resolving the coordinate.</p>
+
+<p>Will consume the chosen tip.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zone</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         Zone of the coordinate.
+        </li>
+        <li><span class="parameter">coord</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         Coordinate in the zone to resolve
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">flow.resolveAddress(<span class="string">"Zone1"</span>, <span class="string">"A1"</span>)</pre></li>
+        <li><pre class="example">veon.gozone(<span class="string">"Zone1"</span>, flow.resolveAddress(<span class="string">"Zone1"</span>, <span class="string">"A1"</span>))</pre></li>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2024-08-28 16:34:07 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
