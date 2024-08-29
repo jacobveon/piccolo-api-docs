@@ -69,21 +69,8 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#acquiretip">acquiretip (zone, coord)</a></td>
-	<td class="summary">Logically sets the current tip without physically inserting the tip.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#aspirate">aspirate (zone, coord, volume, flowRate, tracked)</a></td>
-	<td class="summary">Moves to 2mm from the bottom of the item at the zone coordinate and aspirates
-liquid.</td>
-	</tr>
-	<tr>
 	<td class="name" nowrap><a href="#cleartip">cleartip (volume, aspirate_rate, dispense_rate)</a></td>
 	<td class="summary">Aspirates and dispenses to clear any liquid in the pipette.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#closevalve">closevalve ()</a></td>
-	<td class="summary">Only supported on pressure/time based instruments.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#delay">delay (duration)</a></td>
@@ -92,11 +79,6 @@ liquid.</td>
 	<tr>
 	<td class="name" nowrap><a href="#dip">dip (max_depth, aspirate_rate, pressure_threshold)</a></td>
 	<td class="summary">Dip pipette until liquid contact.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#dispense">dispense (zone, coord, volume, flowRate, tracked)</a></td>
-	<td class="summary">Moves the pipette tip to the top of the item at the zone coordinate and dispenses
-liquid.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#eject">eject ()</a></td>
@@ -143,17 +125,9 @@ liquid.</td>
 	<td class="summary">Homes the motors.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#openvalve">openvalve (pressure)</a></td>
-	<td class="summary">Only supported on pressure/time based instruments.</td>
-	</tr>
-	<tr>
 	<td class="name" nowrap><a href="#pause">pause ()</a></td>
 	<td class="summary">Pauses the script until a user presses the resume button
 or a <a href="../manual/commands.md.html#Resume_Script">resume command</a> is sent by an application.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#pickuptip">pickuptip (zone, coord)</a></td>
-	<td class="summary">Pickup tip from the given position.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#print">print (...)</a></td>
@@ -183,14 +157,6 @@ or a <a href="../manual/commands.md.html#Resume_Script">resume command</a> is se
 	<td class="name" nowrap><a href="#setaxispower">setaxispower (axis, state)</a></td>
 	<td class="summary">Turns the axis on/off.</td>
 	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#tipavailable">tipavailable (zone)</a></td>
-	<td class="summary">Returns true when a tip is available in the zone.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#togglevalve">togglevalve (pressure, time)</a></td>
-	<td class="summary">Only supported on pressure/time based instruments.</td>
-	</tr>
 </table>
 
 <br/>
@@ -200,79 +166,6 @@ or a <a href="../manual/commands.md.html#Resume_Script">resume command</a> is se
     <h2 class="section-header "><a name="Functions"></a>Functions</h2>
 
     <dl class="function">
-    <dt>
-    <a name = "acquiretip"></a>
-    <strong>acquiretip (zone, coord)</strong>
-    </dt>
-    <dd>
-    Logically sets the current tip without physically inserting the tip. </p>
-
-<p>Will consume the chosen tip.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">zone</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
-         Zone to collect tip from
-        </li>
-        <li><span class="parameter">coord</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
-         Coordinate in zone containing an un-consumed tip to use
-        </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">veon.acquiretip(<span class="string">"Zone1"</span>, <span class="string">"A1"</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "aspirate"></a>
-    <strong>aspirate (zone, coord, volume, flowRate, tracked)</strong>
-    </dt>
-    <dd>
-    Moves to 2mm from the bottom of the item at the zone coordinate and aspirates
-liquid.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">zone</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
-         Zone to collect tip from
-        </li>
-        <li><span class="parameter">coord</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
-         Coordinate in zone containing an un-consumed tip to use
-        </li>
-        <li><span class="parameter">volume</span>
-            <span class="types"><span class="type">number</span></span>
-         Amount to aspirate
-        </li>
-        <li><span class="parameter">flowRate</span>
-            <span class="types"><span class="type">number</span></span>
-         Rate at which to aspirate liquid
-        </li>
-        <li><span class="parameter">tracked</span>
-            <span class="types"><span class="type">boolean</span></span>
-         When false the motors will stay stationary during aspiration
-        </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">veon.aspirate(<span class="string">"Zone1"</span>, <span class="string">"A1"</span>, <span class="number">50.0</span>, <span class="number">200.0</span>, <span class="keyword">false</span>)</pre>
-    </ul>
-
-</dd>
     <dt>
     <a name = "cleartip"></a>
     <strong>cleartip (volume, aspirate_rate, dispense_rate)</strong>
@@ -303,26 +196,6 @@ liquid.
     <h3>Usage:</h3>
     <ul>
         <pre class="example">veon.cleartip(<span class="number">20.0</span>, <span class="number">50.0</span>, <span class="number">500.0</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "closevalve"></a>
-    <strong>closevalve ()</strong>
-    </dt>
-    <dd>
-    Only supported on pressure/time based instruments. </p>
-
-<p>Closes the valve.
-
-
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">veon.closevalve()</pre>
     </ul>
 
 </dd>
@@ -396,48 +269,6 @@ is made with the liquid surface, or the maximum dip distance has been travelled.
     <h3>Usage:</h3>
     <ul>
         <pre class="example">veon.dip(<span class="number">29.0</span>, <span class="number">2.0</span>, <span class="number">10</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "dispense"></a>
-    <strong>dispense (zone, coord, volume, flowRate, tracked)</strong>
-    </dt>
-    <dd>
-    Moves the pipette tip to the top of the item at the zone coordinate and dispenses
-liquid.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">zone</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
-         Zone to collect tip from
-        </li>
-        <li><span class="parameter">coord</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
-         Coordinate in zone containing an un-consumed tip to use
-        </li>
-        <li><span class="parameter">volume</span>
-            <span class="types"><span class="type">number</span></span>
-         Amount to dispense
-        </li>
-        <li><span class="parameter">flowRate</span>
-            <span class="types"><span class="type">number</span></span>
-         Rate at which to dispense liquid
-        </li>
-        <li><span class="parameter">tracked</span>
-            <span class="types"><span class="type">boolean</span></span>
-         When false the motors will stay stationary during dispense
-        </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">veon.dispense(<span class="string">"Zone1"</span>, <span class="string">"A1"</span>, <span class="number">50.0</span>, <span class="number">200.0</span>, <span class="keyword">false</span>)</pre>
     </ul>
 
 </dd>
@@ -841,33 +672,6 @@ movement in specified by the x/y/z distances separated by commas.
 
 </dd>
     <dt>
-    <a name = "openvalve"></a>
-    <strong>openvalve (pressure)</strong>
-    </dt>
-    <dd>
-    Only supported on pressure/time based instruments. </p>
-
-<p>Sets the output pressure and opens the valve.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">pressure</span>
-            <span class="types"><span class="type">number</span></span>
-         Output pressure to set before opening the valve
-        </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">veon.openvalve(<span class="number">200.0</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
     <a name = "pause"></a>
     <strong>pause ()</strong>
     </dt>
@@ -883,43 +687,6 @@ or a <a href="../manual/commands.md.html#Resume_Script">resume command</a> is se
     <h3>Usage:</h3>
     <ul>
         <pre class="example">veon.pause()</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "pickuptip"></a>
-    <strong>pickuptip (zone, coord)</strong>
-    </dt>
-    <dd>
-    Pickup tip from the given position. </p>
-
-<p>Moves the (bare) pipette to a specified zone/position and drives the pipette down
-to engage the tip at the specified position then withdraws to the safe travel height
-above the position. If the zone position does not contain an object of type “tip”
-or the row/column is not valid this results in an error.</p>
-
-<p>When no tip is found in the given position the i.prep will automatically seek the remaining
-unconsumed tips in the zone. When there are no tips remaining the function will return false.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">zone</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
-         Zone to collect tip from
-        </li>
-        <li><span class="parameter">coord</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
-         Coordinate in the zone to begin searching from
-        </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">veon.pickuptip(<span class="string">'Zone1'</span>, <span class="string">'A1'</span>)</pre>
     </ul>
 
 </dd>
@@ -1195,62 +962,6 @@ the motor will default to the previously set acceleration.
     </ul>
 
 </dd>
-    <dt>
-    <a name = "tipavailable"></a>
-    <strong>tipavailable (zone)</strong>
-    </dt>
-    <dd>
-    Returns true when a tip is available in the zone.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">zone</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
-         Zone to check
-        </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">veon.tipavailable(<span class="string">"Zone1"</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "togglevalve"></a>
-    <strong>togglevalve (pressure, time)</strong>
-    </dt>
-    <dd>
-    Only supported on pressure/time based instruments. </p>
-
-<p>Toggles the valve for the given time at the given output pressure.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">pressure</span>
-            <span class="types"><span class="type">number</span></span>
-         Output pressure
-        </li>
-        <li><span class="parameter">time</span>
-            <span class="types"><span class="type">number</span></span>
-         Time in ms to open the valve for
-        </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">veon.togglevalve(pressure, time)</pre>
-    </ul>
-
-</dd>
 </dl>
 
 
@@ -1258,7 +969,7 @@ the motor will default to the previously set acceleration.
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2024-08-29 11:10:03 </i>
+<i style="float:right;">Last updated 2024-08-29 11:27:50 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
